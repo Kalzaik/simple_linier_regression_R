@@ -1,0 +1,47 @@
+---
+title: "Ozone Modelling pitching"
+author: "Simon W Laufried"
+date: "10/22/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+## Background
+
+#### As Ozone got depleted, through data we can find out the roor cause of the depleting ozone
+
+## Modelling
+
+#### the very first step is with modelling the ozone deplatation, but as many variables involve it is hard to determine which variable makes up the model  
+
+We here display the modelling of each variables in effect to ozone
+
+```{r modelling, echo=FALSE}
+data <- na.omit(airquality)
+data$date <- paste(data$Month, data$Day)
+data$date <- as.Date(data$date, format = "%m %d")
+
+model1 <- lm(Ozone ~ Solar.R, data = data)
+model2 <- lm(Ozone ~ Wind, data = data)
+model3 <- lm(Ozone ~ Temp, data = data)
+
+plot(data$date, data$Ozone, xlab = "Dates", ylab = "Ozone", bty ="n", pch = 16)
+model1lines <- predict(model1, newdata = data)
+lines(data$date, model1lines, col = "red", lwd = 2)
+
+model2lines <- predict(model2, newdata = data)
+lines(data$date, model2lines, col = "blue", lwd = 2)
+
+model3lines <- predict(model3, newdata = data)
+lines(data$date, model3lines, col = "green", lwd = 2)
+```
+
+
+## Solution
+
+#### it was really hard to see the effect of each variable, so we come up with a web that will plot each variable independently and shows only that you want to see with a click of a checkbox
+
+
+
